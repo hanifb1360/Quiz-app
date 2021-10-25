@@ -44,7 +44,7 @@ const quizData = [
           b:  "The Cure",
           c:  "Radiohead",
           d: "Portishead",
-          correct:"R:E.M",
+          correct:"a",
     },
     
     {
@@ -55,7 +55,7 @@ const quizData = [
           b:  "Aerosmith",
           c:  "Guns N'Roses",
           d: "Linkin Park",
-          correct:"Guns N'Roses",
+          correct:"c",
     },
     
     {
@@ -65,7 +65,7 @@ const quizData = [
           b:  "Black Sabbath",
           c:  "Fleetwood Mac",
           d: "Creedence Clearwater Revival",
-          correct:"Deep Purple",
+          correct:"a",
     },
 
     {
@@ -75,7 +75,7 @@ const quizData = [
           b:  "Steely Dan",
           c:  "Deep Purple",
           d: "Black Sabath",
-          correct:"Black Sabath",
+          correct:"d",
     },
     
     {
@@ -85,7 +85,7 @@ const quizData = [
           b:  "Elvis presley",
           c:  "John lennon",
           d: "Bob Dylan",
-          correct:"Eric Clapton",
+          correct:"a",
     },
     
     {
@@ -95,7 +95,7 @@ const quizData = [
           b:  "Dave Grohl",
           c:  "Brian Blade",
           d: "Terry Bozzio",
-          correct:"Dave Grohl",
+          correct:"b",
     },
     
     {
@@ -105,7 +105,7 @@ const quizData = [
           b:  "Pink Floyd",
           c:  "The Who",
           d: "The Beatles",
-          correct:"Pink Floyd",
+          correct:"b",
     },
 
     {
@@ -115,7 +115,7 @@ const quizData = [
           b:  "The Black Album",
           c:  "Acca Dacca",
           d: "The New Yardbirds",
-          correct:"The New Yardbirds",
+          correct:"d",
     },
     
     {
@@ -125,7 +125,7 @@ const quizData = [
           b:  "David Gilmour",
           c:  "Bob Dylan",
           d: "Roger Waters",
-          correct:"Bob Dylan",
+          correct:"c",
     },
     
     {
@@ -135,7 +135,7 @@ const quizData = [
           b:  "1966",
           c:  "1953",
           d: "1960",
-          correct:"Bob Dylan",
+          correct:"b",
     }
     
 
@@ -143,67 +143,85 @@ const quizData = [
 
     //actual quiz
 
-const quiz= document.getElementById('quiz')
-const answerEls = document.querySelectorAll('.answer')
-const questionEl = document.getElementById('question')
-const a_text = document.getElementById('a_text')
-const b_text = document.getElementById('b_text')
-const c_text = document.getElementById('c_text')
-const d_text = document.getElementById('d_text')
-const submitBtn = document.querySelector('.submit')
-
-
-let currentQuiz = 0
-let score = 0
-
-loadQuiz()
-
-function loadQuiz() {
-
-    deselectAnswers()
-
-    const currentQuizData = quizData[currentQuiz]
-
-    questionEl.innerText = currentQuizData.question
-    a_text.innerText = currentQuizData.a
-    b_text.innerText = currentQuizData.b
-    c_text.innerText = currentQuizData.c
-    d_text.innerText = currentQuizData.d
-}
-
-function deselectAnswers() {
-    answerEls.forEach(answerEl => answerEl.checked = false)
-}
-
-function getSelected() {
-    let answer
-    answerEls.forEach(answerEl => {
-        if(answerEl.checked) {
-            answer = answerEl.id
+    const quiz= document.getElementById('quiz')
+    const answerEls = document.querySelectorAll('.answer')
+    const questionEl = document.getElementById('question')
+    const a_text = document.getElementById('a_text')
+    const b_text = document.getElementById('b_text')
+    const c_text = document.getElementById('c_text')
+    const d_text = document.getElementById('d_text')
+    const submitBtn = document.querySelector('.submit')
+    
+    
+    let currentQuiz = 0
+    let score = 0
+    
+    loadQuiz()
+    
+    function loadQuiz() {
+    
+        deselectAnswers()
+    
+        const currentQuizData = quizData[currentQuiz]
+    
+        questionEl.innerText = currentQuizData.question
+        a_text.innerText = currentQuizData.a
+        b_text.innerText = currentQuizData.b
+        c_text.innerText = currentQuizData.c
+        d_text.innerText = currentQuizData.d
+    }
+    
+    function deselectAnswers() {
+        answerEls.forEach(answerEl => answerEl.checked = false)
+    }
+    
+    function getSelected() {
+        let answer
+        answerEls.forEach(answerEl => {
+            if(answerEl.checked) {
+                answer = answerEl.id
+                console.log(answerEl.value)
+            }
+        })
+        return answer
+    }
+    
+    
+    submitBtn.addEventListener('click', () => {
+        const answer = getSelected()
+        if(answer) {
+           if(answer === quizData[currentQuiz].correct) {
+               score++
+           }
+    
+           currentQuiz++
+    
+           if(currentQuiz < quizData.length) {
+               loadQuiz()
+           } else { if(score>7){
+            quiz.innerHTML = `
+            <div class= "result-box">
+            <h2 class="green-text">You answered ${score}/${quizData.length} questions correctly</h2>
+    
+            <button id="reload" onclick="location.reload()">Reload</button> </div>
+            `
+    
+           }
+           else if(score>4){
+            quiz.innerHTML = `<div class= "result-box">
+            <h2 class="orange-text">You answered ${score}/${quizData.length} questions correctly</h2>
+    
+            <button id="reload" onclick="location.reload()">Reload</button></div>
+            `
+           }
+           else{
+            quiz.innerHTML = `<div class= "result-box">
+            <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+    
+            <button id="reload" onclick="location.reload()">Reload</button></div>
+            `
+           }
+               
+           }
         }
     })
-    return answer
-}
-
-//Score result function
-
-submitBtn.addEventListener('click', () => {
-    const answer = getSelected()
-    if(answer) {
-       if(answer === quizData[currentQuiz].correct) {
-           score++
-       }
-
-       currentQuiz++
-
-       if(currentQuiz < quizData.length) {
-           loadQuiz()
-       } else {
-           quiz.innerHTML = `
-           <h2>You answered ${score}/${quizData.length} questions correctly</h2>
-
-           <button onclick="location.reload()">Reload</button>
-           `
-       }
-    }
-}) 

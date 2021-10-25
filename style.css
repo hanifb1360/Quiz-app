@@ -33,7 +33,8 @@ body.night {
 }
 
 .info_box.activeInfo,
-.quiz_box.activeQuiz{
+.quiz_box.activeQuiz,
+.result_box.activeResult{
     z-index: 5;
     opacity: 1;
     pointer-events: auto;
@@ -56,7 +57,7 @@ body.night {
 
 .info_box{
     width: 540px;
-    background: #fff;
+    background: rgb(255, 255, 255);
     border-radius: 25px;
     opacity: 0;
     pointer-events: none;
@@ -162,16 +163,36 @@ body.night {
   ul li label{
     cursor: pointer;
   }
+
+
+.submit-subbox{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 35px 230px;
+    border-top: 1px solid lightgray;
+
+
+
+}
+
   .submit{
-    background-color: #0989CF;
+    background-color: #17608a;
     color: #fff;
     border: none;
     display: block;
-    width: 100%;
+    width: 400px;
+    /*border-radius: 35px;*/
     cursor: pointer;
     font-size: 1.1rem;
     font-family: inherit;
     padding: 1.3rem;
+    margin: 0;
+    transition: all 0.3s ease;
+    
+  
+   
     
   }
   .submit:hover{
@@ -186,51 +207,20 @@ body.night {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .dark_change{
     position: absolute;
-    width: 45px;
-    height: 22px;
-    right: 20px;
-    top: 20px;
+    width: 40px;
+    height: 15px;
+    right: 30px;
+    top: 30px;
     border: 2px solid;
     border-radius: 20px;
 }
 .dark_change:before{
     position: absolute;
     content: '';
-    width:20px;
-    height: 20px;
+    width:10px;
+    height: 10px;
     left: 1px;
     top: 1px;
     border-radius: 50%;
@@ -243,5 +233,42 @@ body.night {
     background: #fff;
 }
 
+.green-text{
+    color: #44b927;
+  }
+  
+  .orange-text{
+    color: orange;
+  }
 
+  .result-box{
+      border-radius: 45px;
+      background-color: #fff;
+      padding: 45px;
+  }
 
+  #reload{
+    background-color: #17608a;
+    color: #fff;
+    border: none;
+    display: block;
+    width: 400px;
+    /*border-radius: 35px;*/
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: inherit;
+    padding: 1.3rem;
+    margin: 0;
+    transition: all 0.3s ease;
+    
+  
+   
+    
+  }
+  #reload:hover{
+    background-color: #1497dd;
+  }
+  #reload:focus{
+    outline: none;
+    background-color: #48a8db;
+  }
