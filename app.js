@@ -9,7 +9,7 @@ const quiz_box = document.querySelector(".quiz_box");
 const content = document.getElementsByTagName('body')[0];
 const darkMode = document.querySelector('.dark_change');
 
-//dark mide 
+//dark mode 
 
 darkMode.addEventListener('click', function(){
     darkMode.classList.toggle('active');
